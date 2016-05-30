@@ -102,7 +102,65 @@ end
 
 Agregan funciones a métodos ya existentes, antes o después. Es como un envoltorio.
 
-##  
+```ruby
+class SimpleWriter
+  def initialize(path)
+    @file = File.open(path, 'w')
+  end
+  def write_line(line)
+    @file.print(line)
+    @file.print("\n")
+  end
+end
+
+class WriterDecorator
+  def initialize(real_writer)
+    @real_writer = real_writer
+  end
+  def write_line(line)
+    @real_writer.write_line(line)
+  end
+end
+#Agrega número de linea a cada linea
+class NumberingWriter < WriterDecorator
+  def initialize(real_writer)
+    super(real_writer)
+    @line_number = 1
+  end
+  def write_line(line)
+    @real_writer.write_line("#{@line_number}: #{line}")
+    @line_number += 1
+  end
+end
+```
+
+## Singleton
+
+Cuando hay solo una instancia de una clase. Ej: Un tablero en un juego de ajedrez. Para no tener que pasarse el objeto todo el rato se permite el acceso global a este.
+
+```ruby
+class Singleton
+  @@instance = Singleton.new
+  def self.instance
+    return @@instance
+  end
+  private_class_method :new //evita que se instancie
+end
+
+x = Singleton.instance
+```
+
+## Factories
+
+Para automatizar la creación de objetos. Útil en simulaciones
+
+## Fachada
+
+Interfaz simplificada que permite controlar un sistema.
+
+## Adaptador
+
+Cuando una clase tiene la información y métodos que se requieren, pero la forma de interactuar con esta no es la interfaz que se necesita. El adaptador es una clase que envuelve la clase original para adaptarla a la interfaz deseada.
 
 # UML
 

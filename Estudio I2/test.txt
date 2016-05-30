@@ -1,0 +1,4 @@
+
+Linea en el escritor simple
+1 Linea en el escritor decorado
+2 Otra Linea en el escritor decorado
